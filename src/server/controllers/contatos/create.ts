@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 
 interface IContato {
     nome: string;
-    numero: number;
+    numero: string;
 };
 
 interface IFilter {
@@ -15,7 +15,7 @@ interface IFilter {
 export const createValidation = validation((getSchema) => ({
     body: getSchema<IContato>(yup.object().shape({
         nome: yup.string().required().min(3),
-        numero: yup.number().required().min(9), 
+        numero: yup.string().required().min(9), 
     })),
     query: getSchema<IFilter>(yup.object().shape({
         filter: yup.string().min(3),
@@ -23,5 +23,5 @@ export const createValidation = validation((getSchema) => ({
 }));
 
 export const create = async (req: Request<{}, {}, IContato>, res: Response) => {
-    return res.send("Created");
+    return res.status(StatusCodes.CREATED).send("Created");
 };
