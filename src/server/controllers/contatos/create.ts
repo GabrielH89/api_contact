@@ -23,5 +23,5 @@ export const createValidation = validation((getSchema) => ({
 }));
 
 export const create = async (req: Request<{}, {}, IContato>, res: Response) => {
-    return res.status(StatusCodes.CREATED).send("Created");
+    return res.status(StatusCodes.CREATED).json(1);
 };
