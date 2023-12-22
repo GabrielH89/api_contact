@@ -15,7 +15,6 @@ export const createValidation = validation((getSchema) => ({
 }));
 
 export const create = async (req: Request<{}, {}, IContato>, res: Response) => {
-    //return res.status(StatusCodes.CREATED).json(1);
     const result = await ContatosProvider.create(req.body);
 
     if(result instanceof Error){
