@@ -2,6 +2,7 @@ import { Request, Response, response } from "express";
 import { validation } from "../../shared/middlewares";
 import * as yup from 'yup';
 import { StatusCodes } from "http-status-codes";
+import { ContatosProvider } from "../../database/providers/contatos";
 
 interface IParamProps {
     id?: number;
@@ -14,12 +15,22 @@ export const deleteByIdValidation = validation(getSchema => ({
 }));
 
 export const deleteById = async (req: Request<IParamProps>, res: Response) => {
-   
-  if (Number(req.params.id) === 999) return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    errors: {
-      default: 'Registro não encontrado'
-    }
-  });
+  if(!req.params.id){
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: "O parâmetro id precisa ser informado"
+      }
+    });
+  }
+
+  const result = await ContatosProvider.deleteById(req.params.id);
+  if(result instanceof Error){
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: {
+        default: result.message
+      }
+    });
+  }
 
   return res.status(StatusCodes.NO_CONTENT).send();
 };

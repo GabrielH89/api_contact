@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
 import { validation } from '../../shared/middlewares';
 import { IContato } from '../../database/models';
+import { ContatosProvider } from '../../database/providers/contatos';
 
 interface IParamProps {
   id?: number;
@@ -21,12 +22,31 @@ export const updateByIdValidation = validation(getSchema => ({
 }));
 
 export const updateById = async (req: Request<IParamProps, {}, IBodyProps>, res: Response) => {
-  if(Number(req.params.id) === 999) return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+  /*if(Number(req.params.id) === 999) return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
     errors: {
         default: 'Registro não encontrado'
     }
   })
 
-  return res.status(StatusCodes.NO_CONTENT).send();
+  return res.status(StatusCodes.NO_CONTENT).send();*/
+
+  if(!req.params.id){
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: "O parâmetro id precisa ser informado"
+      }
+    });
+  }
+
+  const result = await ContatosProvider.updateById(req.params.id, req.body);
+  if(result instanceof Error){
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: {
+        default: result.message
+      }
+    });
+  }
+
+  return res.status(StatusCodes.NO_CONTENT).json(result);
 };
 
