@@ -3,7 +3,6 @@ import { validation } from "../../shared/middlewares";
 import * as  yup from 'yup';
 import { StatusCodes } from "http-status-codes";
 
-
 interface IParamProps {
     id?: number;
 };
@@ -24,6 +23,8 @@ export const getById = async (req: Request<IParamProps>, res: Response) => {
 
     return res.status(StatusCodes.OK).json({
         id: req.params.id,
+        nome: 'Gabriel',
+        numero: 9181917171
     });
 }
 
