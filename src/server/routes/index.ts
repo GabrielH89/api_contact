@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { ContatosController } from "../controllers";
+import { PessoasController } from "../controllers";
 
 const router = Router();
 
@@ -11,4 +12,14 @@ router.post('/contacts', ContatosController.createValidation, ContatosController
 router.put('/contacts/:id', ContatosController.updateByIdValidation, ContatosController.updateById);
 router.delete('/contacts/:id', ContatosController.deleteByIdValidation, ContatosController.deleteById);
 
+//Rotas de pessoas
+router.get('/peoples', PessoasController.getAllValidation, PessoasController.getAll);
+router.get('/peoples/:id', PessoasController.getByIdValidation, PessoasController.getById);
+router.post('/peoples', PessoasController.createValidation, PessoasController.create);
+router.put('/peoples/:id', PessoasController.updateByIdValidation, PessoasController.updateById);
+router.delete('/peoples/:id', PessoasController.deleteByIdValidation, PessoasController.deleteById);
+
 export {router};
+
+
+

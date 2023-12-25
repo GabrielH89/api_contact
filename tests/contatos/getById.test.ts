@@ -15,7 +15,11 @@ describe('Contatos - getById', () => {
         const registroBuscado = await testServer.get('/contacts/999').send();
         expect(registroBuscado.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
         expect(registroBuscado.body).toHaveProperty('errors.default');
+    }),
+    it('Tenta buscar registro com id que não seja maior que 0', async () => {
+        const registroBuscado = await testServer.get('/contacts/-1').send();
+        expect(registroBuscado.statusCode).toBe(StatusCodes.BAD_REQUEST);
+        expect(registroBuscado.body).toHaveProperty('errors.params');
     })
-   
 })
 
