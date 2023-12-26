@@ -1,7 +1,8 @@
 
 export enum ETableNames {
     contato = 'contato',
-    pessoa = 'pessoa'
+    pessoa = 'pessoa',
+    usuario = 'usuario',
 }
 
 
