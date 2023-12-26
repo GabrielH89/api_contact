@@ -1,7 +1,7 @@
 import { Router } from "express";
-
 import { ContatosController } from "../controllers";
 import { PessoasController } from "../controllers";
+import { UsuariosController } from "../controllers";
 
 const router = Router();
 
@@ -18,6 +18,10 @@ router.get('/peoples/:id', PessoasController.getByIdValidation, PessoasControlle
 router.post('/peoples', PessoasController.createValidation, PessoasController.create);
 router.put('/peoples/:id', PessoasController.updateByIdValidation, PessoasController.updateById);
 router.delete('/peoples/:id', PessoasController.deleteByIdValidation, PessoasController.deleteById);
+
+//Rotas de Usuarios
+router.post('/signIn', UsuariosController.signInValidation, UsuariosController.signIn);
+router.post('/signUp', UsuariosController.signUpValidation, UsuariosController.signUp);
 
 export {router};
 

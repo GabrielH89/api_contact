@@ -13,7 +13,8 @@ describe('Pessoas - deleteById', () => {
     it('Deleta registro existente na tabela', async () => {
         const response = await testServer.post('/peoples')
         .send({nomeCompleto: 'Gabriel', email: 'gabriel@gmail.com', contatoId});
-
+        expect(response.statusCode).toBe(StatusCodes.CREATED);
+        
         const registroDeletado = await testServer.delete(`/peoples/${response.body}`).send();
         expect(registroDeletado.statusCode).toBe(StatusCodes.NO_CONTENT);
     }),
