@@ -20,8 +20,8 @@ router.put('/peoples/:id', PessoasController.updateByIdValidation, PessoasContro
 router.delete('/peoples/:id', PessoasController.deleteByIdValidation, PessoasController.deleteById);
 
 //Rotas de Usuarios
-router.post('/signIn', UsuariosController.signInValidation, UsuariosController.signIn);
-router.post('/signUp', UsuariosController.signUpValidation, UsuariosController.signUp);
+router.post('/signin', UsuariosController.signInValidation, UsuariosController.signIn);
+router.post('/signup', UsuariosController.signUpValidation, UsuariosController.signUp);
 
 export {router};
 
